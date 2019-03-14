@@ -1,0 +1,32 @@
+toolchain("linux_x64") {
+    tool("cc") {
+        command = "gcc -o {{output}} -c {{source}}"
+        outputs = [ "{{source_out_dir}}/{{source_name_part}}.o" ]
+        description = "CC {{source}}"
+    }
+
+    tool("cxx") {
+        command = "g++ -o {{output}} -c {{source}}"
+        outputs = [ "{{source_out_dir}}/{{source_name_part}}.o" ]
+        description = "CXX {{source}}"
+    }
+
+    tool("link") {
+        outfile = "{{root_out_dir}}/executable"
+        ld = "g++"
+
+        outputs = [ outfile ]
+
+        command = "$ld {{ldflags}} -o $outfile {{libs}} {{inputs}}" 
+        description = "LD executable"
+    }
+
+    tool("stamp") {
+        command = "touch {{output}}"
+        description = "STAMP {{output}}"
+    }
+
+    toolchain_args = {
+        current_cpu = "x64"
+    }
+}

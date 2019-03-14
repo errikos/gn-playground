@@ -1,0 +1,1 @@
+set_default_toolchain("//build/toolchain:linux_x64")
